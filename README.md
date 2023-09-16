@@ -1,1 +1,5 @@
-This is the readme file for printF function implementation
+# ALX Software Enginering Team Project
+
+## Project Title: Custom Printf Function
+
+### Team members: Boluwatife Ajao (Mr Zyck) & Chigbo Goodluck (Triad)
