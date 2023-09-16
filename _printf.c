@@ -5,7 +5,7 @@
 /**
 * _printf - custom printf() to print formatted strings to stdout
 * @format: format string to be printed
-* Return: 0 if successfull and -1 on error
+* Return: 0 if successful and -1 on error
 */
 int _printf(const char *format, ...)
 {
