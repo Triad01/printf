@@ -29,19 +29,14 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
+			num_of_characters++;
 			format++;
 			if (*format == '\0')
 				break;
 			if (*format == '%')
-			{
 				write(1, format, 1);
-				num_of_characters++;
-			}
 			else if (*format == 'c')
-			{
 				character_handler(va_arg(list_of_args, int));
-				num_of_characters++;
-			}
 			else if (*format == 's')
 			{
 				_str_length = string_handler(va_arg(list_of_args, char*));
