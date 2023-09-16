@@ -22,11 +22,10 @@ int _printf(const char *format, ...)
 	va_start(list_of_args, format);
 	while (*format)
 	{
-		num_of_characters++;
-
 		if (*format != '%')
 		{
 			write(1, format, 1);
+			num_of_characters++;
 		}
 		else
 		{
@@ -34,9 +33,15 @@ int _printf(const char *format, ...)
 			if (*format == '\0')
 				break;
 			if (*format == '%')
+			{
 				write(1, format, 1);
+				num_of_characters++;
+			}
 			else if (*format == 'c')
+			{
 				character_handler(va_arg(list_of_args, int));
+				num_of_characters++;
+			}
 			else if (*format == 's')
 			{
 				_str_length = string_handler(va_arg(list_of_args, char*));
