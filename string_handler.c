@@ -2,7 +2,7 @@
 #include <stdarg.h>
 #include <unistd.h>
 /**
-* string_handler - prints string to the stdout
+* string_handler - prints strings to the stdout
 * @string: string to be printed out
 * Return: length of the string
 */

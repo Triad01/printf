@@ -25,23 +25,25 @@ int _printf(const char *format, ...)
 			num_of_characters++;
 		}
 		else
+		{
 			format++;
-		if (*format == '\0')
-			break;
-		if (*format == '%')
-		{
-			write(1, format, 1);
-			num_of_characters++;
-		}
-		else if (*format == 'c')
-		{
-			character_handler(va_arg(list_of_args, int));
-			num_of_characters++;
-		}
-		else if (*format == 's')
-		{
-			_str_length = string_handler(va_arg(list_of_args, char*));
-			num_of_characters += _str_length;
+			if (*format == '\0')
+				break;
+			if (*format == '%')
+			{
+				write(1, format, 1);
+				num_of_characters++;
+			}
+			else if (*format == 'c')
+			{
+				character_handler(va_arg(list_of_args, int));
+				num_of_characters++;
+			}
+			else if (*format == 's')
+			{
+				_str_length = string_handler(va_arg(list_of_args, char*));
+				num_of_characters +=_str_length;
+			}
 		}
 		format++;
 	}
