@@ -22,14 +22,14 @@ int _printf(const char *format, ...)
 	va_start(list_of_args, format);
 	while (*format)
 	{
+		num_of_characters++;
+
 		if (*format != '%')
 		{
 			write(1, format, 1);
-			num_of_characters++;
 		}
 		else
 		{
-			num_of_characters++;
 			format++;
 			if (*format == '\0')
 				break;
