@@ -1,7 +1,7 @@
 #include "main.h"
 #include <unistd.h>
 /**
-* character_handler - prints a character to the stdout
+* character_handler - prints a character to stdout
 * @character: character to be printed
 * Return: always character
 */
