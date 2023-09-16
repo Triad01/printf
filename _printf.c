@@ -42,7 +42,7 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				_str_length = string_handler(va_arg(list_of_args, char*));
-				num_of_characters +=_str_length;
+				num_of_characters += _str_length;
 			}
 		}
 		format++;
