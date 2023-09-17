@@ -46,8 +46,16 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				_str_length = string_handler(va_arg(list_of_args, char*));
-				num_of_characters += _str_length;
+				if (format == NULL)
+				{
+					write(1, "null", 5);
+					num_of_characters++;
+				}
+				else
+				{
+					_str_length = string_handler(va_arg(list_of_args, char*));
+					num_of_characters += _str_length;
+				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
