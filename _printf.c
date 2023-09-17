@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 {
 	int num_of_characters, _str_length, number;
 	va_list list_of_args;
-	char num_str[20];
+	char num_str[20], character;
 
 	num_of_characters = _str_length = 0;
 
@@ -39,13 +39,28 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'c')
 			{
-				character_handler(va_arg(list_of_args, int));
+				character = va_arg(list_of_args, int);
+				write(1, &character, 1);
 				num_of_characters++;
 			}
 			else if (*format == 's')
 			{
-				_str_length = string_handler(va_arg(list_of_args, char*));
-				num_of_characters += _str_length;
+ 	  	 		char *str = va_arg(list_of_args, char*);
+    				if (str == NULL)
+    				{
+        				write(1, "(null)", 6);
+        				num_of_characters += 6;
+    				}
+    				else
+    				{
+        				int str_len = 0;
+        				while (str[str_len] != '\0')
+        				{
+            					write(1, &str[str_len], 1);
+            					str_len++;
+        				}
+        				num_of_characters += str_len;
+    				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
