@@ -32,10 +32,21 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 				break;
-			if (*format == '%')
+			else if (*format == '%')
 			{
-				write(1, format, 1);
-				num_of_characters++;
+				format++;
+				if (*format != '\0')
+				{
+					write(1, "Unknown format specifier: %", 26);
+					num_of_characters += 26;
+					write(1, format, 1);
+					num_of_characters++;
+				}
+				else
+				{
+					write(1, format - 1, 1);
+					num_of_characters++;
+				}
 			}
 			else if (*format == 'c')
 			{
