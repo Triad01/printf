@@ -46,24 +46,8 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				char *str = va_arg(list_of_args, char*);
-
-				if (str == NULL)
-				{
-					write(1, "(null)", 6);
-					num_of_characters += 6;
-				}
-				else
-				{
-					int str_len = 0;
-
-					while (str[str_len] != '\0')
-					{
-						write(1, &str[str_len], 1);
-						str_len++;
-					}
-					num_of_characters += str_len;
-				}
+				_str_length = string_handler(va_arg(list_of_args, char*));
+				num_of_characters += _str_length;
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
