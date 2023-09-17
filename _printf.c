@@ -72,6 +72,14 @@ int _printf(const char *format, ...)
 				write(1, num_str, strlen(num_str));
 				num_of_characters += strlen(num_str);
 			}
+			else
+			{
+				char err_msg[50];
+				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
+
+				write(1, err_msg, err_msg_len);
+				num_of_characters += err_msg_len;
+			}
 		}
 		format++;
 	}
