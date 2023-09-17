@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 /**
 * _printf - custom printf() to print formatted strings to stdout
 * @format: format string to be printed
@@ -74,7 +75,7 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				char err_msg[3];
+				char err_msg[5];
 				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
 
 				write(1, err_msg, err_msg_len);
