@@ -9,6 +9,7 @@
 * @format: format string to be printed
 * Return: 0 if successful and -1 on error
 */
+int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
 	int num_of_characters, _str_length, number;
@@ -32,21 +33,10 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == '\0')
 				break;
-			else if (*format == '%')
+			if (*format == '%')
 			{
-				format++;
-				if (*format != '\0')
-				{
-					write(1, "Unknown format specifier: %", 26);
-					num_of_characters += 26;
-					write(1, format, 1);
-					num_of_characters++;
-				}
-				else
-				{
-					write(1, format - 1, 1);
-					num_of_characters++;
-				}
+				write(1, format, 1);
+				num_of_characters++;
 			}
 			else if (*format == 'c')
 			{
@@ -56,22 +46,24 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
- 	  	 		char *str = va_arg(list_of_args, char*);
-    				if (str == NULL)
-    				{
-        				write(1, "(null)", 6);
-        				num_of_characters += 6;
-    				}
-    				else
-    				{
-        				int str_len = 0;
-        				while (str[str_len] != '\0')
-        				{
-            					write(1, &str[str_len], 1);
-            					str_len++;
-        				}
-        				num_of_characters += str_len;
-    				}
+				char *str = va_arg(list_of_args, char*);
+
+				if (str == NULL)
+				{
+					write(1, "(null)", 6);
+					num_of_characters += 6;
+				}
+				else
+				{
+					int str_len = 0;
+
+					while (str[str_len] != '\0')
+					{
+						write(1, &str[str_len], 1);
+						str_len++;
+					}
+					num_of_characters += str_len;
+				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
