@@ -76,6 +76,7 @@ int _printf(const char *format, ...)
 			{
 				char err_msg[3];
 				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
+
 				write(1, err_msg, err_msg_len);
 				num_of_characters += err_msg_len;
 			}
