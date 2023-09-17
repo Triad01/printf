@@ -46,14 +46,22 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
-				if (format == NULL)
+				char *str = va_arg(list_of_args, char*);
+
+				if (str == NULL)
 				{
-					write(1, "null", 5);
-					num_of_characters++;
+					write(1, "(null)", 6);
+					num_of_characters += 6;
 				}
 				else
 				{
-					_str_length = string_handler(va_arg(list_of_args, char*));
+					_str_length = 0;
+
+					while (str[_str_length] != '\0')
+					{
+						write(1, &str[_str_length], 1);
+						_str_length++;
+					}
 					num_of_characters += _str_length;
 				}
 			}
