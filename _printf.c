@@ -42,16 +42,10 @@ int _printf(const char *format, ...)
 			else if (*format == 'c')
 			{
 				character = va_arg(list_of_args, int);
-				if (character >= 32 && character <= 126)
-				{
-					write(1, &character, 1);
-					num_of_characters++;
-				} 
-				else
-				{
-					write(1, "[INVALID]", 8);
-					num_of_characters += 8;
-				}
+				if (!(character >= 32 && character <= 126))
+					return (-1);
+				write(1, &character, 1);
+				num_of_characters++;
 			}
 			else if (*format == 's')
 			{
