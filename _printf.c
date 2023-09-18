@@ -51,8 +51,8 @@ int _printf(const char *format, ...)
 
 				if (str == NULL)
 				{
-					write(1, "(null)", 7);
-					num_of_characters += 7;
+					write(1, "(null)", 6);
+					num_of_characters += 6;
 				}
 				else
 				{
