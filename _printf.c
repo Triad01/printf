@@ -17,7 +17,7 @@ int _printf(const char *format, ...)
 	va_list list_of_args;
 	char num_str[20], character;
 
-	num_of_characters = _str_length = 0;
+	num_of_characters = 0;
 
 	if (format == NULL)
 		return (-1);
