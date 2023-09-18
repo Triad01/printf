@@ -13,9 +13,9 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int num_of_characters, _str_length, number;
+	int num_of_characters, _str_length, number, character;
 	va_list list_of_args;
-	char num_str[20], character;
+	char num_str[20];
 
 	num_of_characters = _str_length = 0;
 
