@@ -3,8 +3,8 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 /**
 * _printf - custom printf() to print formatted strings to stdout
 * @format: format string to be printed
@@ -53,6 +53,7 @@ int _printf(const char *format, ...)
 				{
 					write(1, "(null)", 6);
 					num_of_characters += 6;
+					return (-1);
 				}
 				else
 				{
