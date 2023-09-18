@@ -1,4 +1,10 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 /**
 * _printf - custom printf() to print formatted strings to stdout
 * @format: format string to be printed
