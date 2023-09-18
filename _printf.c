@@ -51,6 +51,7 @@ int _printf(const char *format, ...)
 
 				if (str == NULL)
 				{
+					num_of_characters++;
 					return (*str);
 				}
 				else
