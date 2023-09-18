@@ -3,35 +3,34 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 /**
-* _printf - main function for printing
-* @format: strings to be printed out to stdio
-* @...: list of Rgument
-* Return: return number/ length of string
-*/
+ * _printf - custom printf() to print formatted strings to stdout
+ * description:a function that produces output according to a format.
+ * @format: format string to be printed
+ * Return: 0 if successful and -1 on error
+ */
+
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int g_strint_cnt, _str_length;
-	char per_di[20];
+	int num_of_characters, _str_length;
+	int number;
+	va_list list_of_args;
+	char num_str[20], character;
 
-	va_list m_list;
-
-	g_strint_cnt = 0;
+	num_of_characters = 0;
 
 	if (format == NULL)
 		return (-1);
-	va_start(m_list, format);
-
+	va_start(list_of_args, format);
 	while (*format)
 	{
 		if (*format != '%')
 		{
 			write(1, format, 1);
-			g_strint_cnt++;
+			num_of_characters++;
 		}
 		else
 		{
@@ -41,55 +40,52 @@ int _printf(const char *format, ...)
 			if (*format == '%')
 			{
 				write(1, format, 1);
-				g_strint_cnt++;
+				num_of_characters++;
 			}
 			else if (*format == 'c')
 			{
-				char chars = va_arg(m_list, int);
-
-				write(1, &chars, 1);
-				g_strint_cnt++;
+				character = va_arg(list_of_args, int);
+				write(1, &character, 1);
+				num_of_characters++;
 			}
 			else if (*format == 's')
 			{
-				char *sttp = va_arg(m_list, char*);
+				char *str = va_arg(list_of_args, char*);
 
-				if (sttp == NULL)
+				if (str == NULL)
 				{
 					write(1, "(null)", 6);
-					g_strint_cnt += 6;
+					num_of_characters += 6;
 				}
 				else
 				{
 					_str_length = 0;
 
-					while (sttp[_str_length] != '\0')
+					while (str[_str_length] != '\0')
 					{
-						write(1, &sttp[_str_length], 1);
+						write(1, &str[_str_length], 1);
 						_str_length++;
 					}
-						g_strint_cnt += _str_length;
+					num_of_characters += _str_length;
 				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
-				int d_num = va_arg(m_list, int);
-
-				snprintf(per_di, sizeof(per_di), "%d", d_num);
-				write(1, per_di, strlen(per_di));
-				g_strint_cnt += strlen(per_di);
+				number = va_arg(list_of_args, int);
+				snprintf(num_str, sizeof(num_str), "%d", number);
+				write(1, num_str, strlen(num_str));
+				num_of_characters += strlen(num_str);
 			}
 			else
 			{
-				char m_error[7];
-				int m_err_len = snprintf(m_error, sizeof(m_error), "%%%c", *format);
+				char err_msg[7];
+				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
 
-				write(1, m_error, m_err_len);
-				g_strint_cnt += m_err_len;
+				write(1, err_msg, err_msg_len);
+				num_of_characters += err_msg_len;
 			}
 		}
 		format++;
-	}
-		va_end(m_list);
-		return (g_strint_cnt);
+	} va_end(list_of_args);
+	return (num_of_characters);
 }
