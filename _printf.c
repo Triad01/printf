@@ -56,6 +56,8 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
+					_str_length = 0;
+
 					while (str[_str_length] != '\0')
 					{
 						write(1, &str[_str_length], 1);
