@@ -12,7 +12,8 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int num_of_characters, _str_length, number;
+	unsigned int num_of_characters, _str_length;
+	int number;
 	va_list list_of_args;
 	char num_str[20], character;
 
