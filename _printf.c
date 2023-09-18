@@ -53,7 +53,6 @@ int _printf(const char *format, ...)
 				{
 					write(1, "(null)", 6);
 					num_of_characters += 6;
-					return (-1);
 				}
 				else
 				{
