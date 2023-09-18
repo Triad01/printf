@@ -13,9 +13,9 @@
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int num_of_characters, _str_length, number, character;
+	int num_of_characters, _str_length, number;
 	va_list list_of_args;
-	char num_str[20];
+	char num_str[20], character;
 
 	num_of_characters = _str_length = 0;
 
@@ -56,8 +56,6 @@ int _printf(const char *format, ...)
 				}
 				else
 				{
-					_str_length = 0;
-
 					while (str[_str_length] != '\0')
 					{
 						write(1, &str[_str_length], 1);
