@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 	{
 		if (*format != '%')
 		{
-			fprintf(stdout, format);
+			write(1, format, 1);
 			num_of_characters++;
 		}
 		else
@@ -36,13 +36,13 @@ int _printf(const char *format, ...)
 				break;
 			if (*format == '%')
 			{
-				fprintf(stdout, format);
+				write(1, format, 1);
 				num_of_characters++;
 			}
 			else if (*format == 'c')
 			{
 				character = va_arg(list_of_args, int);
-				fprintf(stdout, &character);
+				write(1, &character, 1);
 				num_of_characters++;
 			}
 			else if (*format == 's')
@@ -51,7 +51,7 @@ int _printf(const char *format, ...)
 
 				if (str == NULL)
 				{
-					fprintf(stdout, "(null)");
+					write(1, "(null)", 6);
 					num_of_characters += 6;
 				}
 				else
@@ -60,7 +60,7 @@ int _printf(const char *format, ...)
 
 					while (str[_str_length] != '\0')
 					{
-						fprintf(stdout, &str[_str_length]);
+						write(1, &str[_str_length], 1);
 						_str_length++;
 					}
 					num_of_characters += _str_length;
@@ -78,7 +78,7 @@ int _printf(const char *format, ...)
 				char err_msg[7];
 				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
 
-				fprintf(stdout, err_msg);
+				write(1, err_msg, err_msg_len);
 				num_of_characters += err_msg_len;
 			}
 		}
