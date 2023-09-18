@@ -49,8 +49,8 @@ int _printf(const char *format, ...)
 				} 
 				else
 				{
-					write(1, "[INVALID]", 9);
-					num_of_characters += 9;
+					write(1, "[INVALID]", 8);
+					num_of_characters += 8;
 				}
 			}
 			else if (*format == 's')
