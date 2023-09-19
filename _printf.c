@@ -1,86 +1,71 @@
-#include "main.h"
-#include <stdarg.h>
-#include <unistd.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdarg.h>
+#include "main.h"
 
 /**
  * _printf - custom printf() to print formatted strings to stdout
  * @format: format string to be printed
- * @...: variable number of arguments to be formatted and printed
- * Return: the number of characters printed
+ * Return: the number of characters printed (excluding the null byte)
  */
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int num_of_characters = 0;
-	va_list list_of_args;
+	va_list args;
+	int printed_chars = 0;
 
 	if (format == NULL)
 		return (-1);
 
-	va_start(list_of_args, format);
+	va_start(args, format);
 
 	while (*format)
 	{
 		if (*format != '%')
 		{
-			write(1, format, 1);
-			num_of_characters++;
+			putchar(*format);
+			printed_chars++;
 		}
 		else
 		{
 			format++;
+
 			if (*format == '\0')
 				break;
 
-			switch (*format)
+			if (*format == '%')
 			{
-				case 'c':
-					{
-						char character = va_arg(list_of_args, int);
+				putchar('%');
+				printed_chars++;
+			}
+			else if (*format == 'c')
+			{
+				char c = va_arg(args, int);
 
-						write(1, &character, 1);
-						num_of_characters++;
-						break;
-					}
-				case 's':
-					{
-						char *str = va_arg(list_of_args, char *);
+				putchar(c);
+				printed_chars++;
+			}
+			else if (*format == 's')
+			{
+				char *str = va_arg(args, char*);
 
-						if (str == NULL)
-							  str = "(null)";
-						write(1, str, strlen(str));
-						num_of_characters += strlen(str);
-						break;
-					}
-				case 'd':
-				case 'i':
+				if (str != NULL)
+				{
+					while (*str)
 					{
-						int number = va_arg(list_of_args, int);
-						char num_str[20];
-						int len = snprintf(num_str, sizeof(num_str), "%d", number);
-
-						write(1, num_str, len);
-						num_of_characters += len;
-						break;
+						putchar(*str);
+						str++;
+						printed_chars++;
 					}
-				case '%':
-					{
-						write(1, "%", 1);
-						num_of_characters++;
-						break;
-					}
-				default:
-					{
-						write(1, format - 1, 2);
-						num_of_characters += 2;
-						break;
-					}
+				}
+				else
+				{
+					printf("(null)");
+					printed_chars += 6;
+				}
 			}
 		}
 		format++;
 	}
-	va_end(list_of_args);
-	return (num_of_characters);
+	va_end(args);
+	return (printed_chars);
 }
