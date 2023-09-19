@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include "main.h"
 #include <unistd.h>
+#include "main.h"
+
 /**
  * _printf - custom printf() to print formatted strings to stdout
  * @format: format string to be printed
@@ -63,17 +64,11 @@ int _printf(const char *format, ...)
 					printed_chars += 6;
 				}
 			}
-			else
-			{
-				char err_msg[7];
-				int err_msg_len = snprintf(err_msg, sizeof(err_msg), "%%%c", *format);
-
-				write(1, err_msg, err_msg_len);
-				printed_chars += err_msg_len;
-			}
 		}
 		format++;
 	}
+
 	va_end(args);
 	return (printed_chars);
 }
+
