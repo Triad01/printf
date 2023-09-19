@@ -12,7 +12,6 @@
  * Return: 0 if successful and -1 on error
  */
 
-int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
 	int num_of_characters, _str_length;
