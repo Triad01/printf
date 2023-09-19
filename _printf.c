@@ -7,16 +7,15 @@
 
 /**
  * _printf - custom printf() to print formatted strings to stdout
- * description:a function that produces output according to a format.
  * @format: format string to be printed
- * Return: 0 if successful and -1 on error
+ * Return: the number of characters printed
  */
-
 int _printf(const char *format, ...);
 int _printf(const char *format, ...)
 {
-	int num_of_characters, _str_length;
-	int number;
+	int num_of_characters = 0;
+	int _str_length, binary[32];
+	int number, base, i, j;
 	va_list list_of_args;
 	char num_str[20], character;
 
@@ -24,7 +23,9 @@ int _printf(const char *format, ...)
 
 	if (format == NULL)
 		return (-1);
+
 	va_start(list_of_args, format);
+
 	while (*format && *format != '\0')
 	{
 		if (*format != '%')
@@ -40,7 +41,6 @@ int _printf(const char *format, ...)
 			if (*format == '%')
 			{
 				write(1, format, 1);
-
 				num_of_characters++;
 			}
 			else if (*format == 'c')
@@ -61,7 +61,6 @@ int _printf(const char *format, ...)
 				else
 				{
 					_str_length = 0;
-
 					while (str[_str_length] != '\0')
 					{
 						write(1, &str[_str_length], 1);
@@ -77,26 +76,25 @@ int _printf(const char *format, ...)
 				write(1, num_str, strlen(num_str));
 				num_of_characters += strlen(num_str);
 			}
-			if (*format == 'b')
+			else if (*format == 'b')
 			{
-				int num = va_arg(list_of_args, int);
-				int base = 2;
-				int i = 0;
-				int j;
-				int binary[32];
-
-				if (num < 0)
+				number = va_arg(list_of_args, int);
+				i = 0;
+				base = 2;
+				if (number < 0)
 				{
 					putchar('-');
 					num_of_characters++;
-					num = -num;
+					number = -number;
 				}
-				while (num > 0)
+
+				while (number > 0)
 				{
-					binary[i] = num % base;
-					num /= base;
+					binary[i] = number % base;
+					number /= base;
 					i++;
 				}
+
 				if (i == 0)
 				{
 					putchar('0');
@@ -121,6 +119,12 @@ int _printf(const char *format, ...)
 			}
 		}
 		format++;
-	} va_end(list_of_args);
+	}
+
+	va_end(list_of_args);
+	putchar('\n');
+	num_of_characters++;
+
 	return (num_of_characters);
 }
+
