@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdarg.h>
-#include <unistd.h>
 #include "main.h"
+#include <unistd.h>
 
 /**
  * _printf - custom printf() to print formatted strings to stdout
@@ -42,8 +42,17 @@ int _printf(const char *format, ...)
 			{
 				char c = va_arg(args, int);
 
-				putchar(c);
-				printed_chars++;
+				if (c < 32 || c >= 127)
+				{
+					putchar('^');
+					putchar(c + 64);
+					printed_chars += 2;
+				}
+				else
+				{
+					putchar(c);
+					printed_chars++;
+				}
 			}
 			else if (*format == 's')
 			{
