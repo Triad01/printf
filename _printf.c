@@ -77,6 +77,40 @@ int _printf(const char *format, ...)
 				write(1, num_str, strlen(num_str));
 				num_of_characters += strlen(num_str);
 			}
+			if (*format == 'b')
+			{
+				int num = va_arg(list_of_args, int);
+				int base = 2;
+				int i = 0;
+				int j;
+				int binary[32];
+
+				if (num < 0)
+				{
+					putchar('-');
+					num_of_characters++;
+					num = -num;
+				}
+				while (num > 0)
+				{
+					binary[i] = num % base;
+					num /= base;
+					i++;
+				}
+				if (i == 0)
+				{
+					putchar('0');
+					num_of_characters++;
+				}
+				else
+				{
+					for (j = i - 1; j >= 0; j--)
+					{
+						putchar('0' + binary[j]);
+						num_of_characters++;
+					}
+				}
+			}
 			else
 			{
 				char err_msg[7];
