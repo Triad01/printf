@@ -1,4 +1,9 @@
 #include "main.h"
+#include <stdarg.h>
+#include <stddef.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <string.h>
 
 /**
  * _printf - print output to stdout according to a format string
