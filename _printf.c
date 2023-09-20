@@ -84,10 +84,11 @@ int _printf(const char *format, ...)
 				int i = 0;
 				int j;
 				int binary[32];
+				char digit;
 
 				if (num < 0)
 				{
-					putchar('-');
+					write(1, "-", 1);
 					num_of_characters++;
 					num = -num;
 				}
@@ -99,14 +100,15 @@ int _printf(const char *format, ...)
 				}
 				if (i == 0)
 				{
-					putchar('0');
+					write(1, "0", 1);
 					num_of_characters++;
 				}
 				else
 				{
 					for (j = i - 1; j >= 0; j--)
 					{
-						putchar('0' + binary[j]);
+						digit = '0' + binary[j];
+						write(1, &digit, 1);
 						num_of_characters++;
 					}
 				}
