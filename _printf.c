@@ -40,7 +40,6 @@ int _printf(const char *format, ...)
 			if (*format == '%')
 			{
 				write(1, format, 1);
-
 				num_of_characters++;
 			}
 			else if (*format == 'c')
@@ -77,40 +76,33 @@ int _printf(const char *format, ...)
 				write(1, num_str, strlen(num_str));
 				num_of_characters += strlen(num_str);
 			}
-			if (*format == 'b')
+			else if (*format == 'b')
 			{
 				int num = va_arg(list_of_args, int);
-				int base = 2;
-				int i = 0;
-				int j;
-				int binary[32];
-				char digit;
+				unsigned int mask = 1 << (sizeof(int) * 8 - 1);
+				int print_digit;
+				int num_of_digits;
 
-				if (num < 0)
+				print_digit = num_of_digits = 0;
+				while (mask)
 				{
-					write(1, "-", 1);
+					if (num & mask)
+					{
+						write(1, "1", 1);
+						print_digit = 1;
+					}
+					else if (print_digit)
+					{
+						write(1, "0", 1);
+					}
+					mask >>= 1;
 					num_of_characters++;
-					num = -num;
+					num_of_digits++;
 				}
-				while (num > 0)
-				{
-					binary[i] = num % base;
-					num /= base;
-					i++;
-				}
-				if (i == 0)
+				if (num_of_digits == 0)
 				{
 					write(1, "0", 1);
 					num_of_characters++;
-				}
-				else
-				{
-					for (j = i - 1; j >= 0; j--)
-					{
-						digit = '0' + binary[j];
-						write(1, &digit, 1);
-						num_of_characters++;
-					}
 				}
 			}
 			else
